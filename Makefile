@@ -8,7 +8,7 @@ SRC = utility_funcs.cpp
 OBJ = $(SRC:.cpp=.o)
 
 DEFS   =
-CFLAGS = -Wall -O2 -c -lm -I$(HOME)/include -I. -L$(HOME)/lib
+CFLAGS = -Wall -O2 -c -lm -I/usr/include -I/usr/local/include -I. -L/usr/lib -L/usr/local/lib
 
 CC = g++
 
@@ -25,12 +25,10 @@ $(TARGET): $(OBJ)
 	ranlib $@.a
 
 install: $(TARGET)
-	@if ! test -d $(HOME)/lib; then  mkdir $(HOME)/lib; fi
-	@if ! test -d $(HOME)/include; then  mkdir $(HOME)/include; fi
-	cp -p $(TARGET).a $(HOME)/lib
-	cp -p $(INC) $(HOME)/include
+	cp -p $(TARGET).a /usr/local/lib
+	cp -p $(INC) /usr/local/include
 
 uninstall: 
-	rm -f $(HOME)/lib/$(TARGET).a
-	rm -f $(HOME)/include/$(INC)
+	rm -f /usr/local/lib/$(TARGET).a
+	rm -f /usr/local/include/$(INC)
 
